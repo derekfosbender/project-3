@@ -5,8 +5,7 @@ const articleSchema = new Schema (
       photo: String,
       title: String,
       content: String,
-      author: String,
-      time: String
+      author: String
     }
 )
 
