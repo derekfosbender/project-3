@@ -1,12 +1,10 @@
 const {Schema, model} = require("mongoose");
 
-const photoSchema = new Schema (
-    {
-      photo: String,
-      location: String,
-      time: String
-    }
-)
+const photoSchema = new Schema ({
+      photo: {type: String},
+      location: {type: String},
+      time: {type: String},
+  });
 
 const Photo = model("Photo", photoSchema);
 

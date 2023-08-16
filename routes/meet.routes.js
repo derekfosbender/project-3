@@ -1,11 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const Meet = require("../models/Meet.model");
+const uploadCloud = require("../config/cloudinary-setup");
 
-router.post("/", (req,res) => {
-    Meet.create(req.body)
-    .then((meet) => {
-        res.json({success: true, meet});
+router.post("/", uploadCloud.single("image"), (req,res) => {
+    console.log({ file: req.file});
+    const meetInputInfo = req.body;
+    meetInputInfo.image = req.file.url;
+    Meet.create(meetInputInfo)
+    .then((newlyCreatedMeet) => {
+        res.json({newlyCreatedMeet});
     })
     .catch((err) => {
         res.json({success: false, error: err})
