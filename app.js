@@ -69,8 +69,8 @@ const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
 
-app.use("/", require("./routes/photo.routes"));
-app.use("/", require("./routes/fileUpload"));
+app.use("/api", require("./routes/photo.routes"));
+app.use("/api", require("./routes/fileUpload"));
 app.use("/article", require("./routes/article.routes"));
 app.use("/meet", require("./routes/meet.routes"));
 app.use("/photo", require("./routes/photo.routes"))

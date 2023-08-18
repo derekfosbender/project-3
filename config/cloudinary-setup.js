@@ -15,13 +15,15 @@ const storage = cloudinaryStorage({
 
     params: {
         folder: "spots",
-        allowed_formats: ["jpg", "png"],
+        allowedFormats: ["jpg", "png"],
     },
 
     filename: (req, file, cb) => {
         cb(null, file.originalname);
     },
 });
+
+console.log({storage, filename: storage.filename});
 
 const uploadCloud = multer({ storage });
 

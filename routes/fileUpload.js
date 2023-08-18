@@ -4,11 +4,11 @@ const Photo = require("../models/Photo.model");
 const uploadCloud = require("../config/cloudinary-setup");
 
 router.patch(
-    "/photo/image/:photoId",
+    "/photo/photo/:photoId",
     uploadCloud.single("photo"),
     (req, res, next) => {
         Photo.findByIdAndUpdate(
-            req.params.productId,
+            req.params.photoId,
             { photo: req.file.url },
             { new: true }
         )
@@ -20,7 +20,7 @@ router.patch(
 );
 
 router.patch(
-    "/photo/imageArray/:photoId",
+    "/photo/photoArray/:photoId",
     uploadCloud.array("photoArray"),
     (req, res, next) => {
         console.log({ theFile: req.files });
@@ -28,7 +28,7 @@ router.patch(
             .then((photoFromDB) => {
                 console.log({ photoFromDB });
                 req.files.forEach((file) => {
-                    photoFromDB.imagePhoto.push(file.url); 
+                    photoFromDB.photoArray.push(file.url); 
                 });
                 photoFromDB
                     .save()

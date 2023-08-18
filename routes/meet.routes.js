@@ -5,11 +5,11 @@ const uploadCloud = require("../config/cloudinary-setup");
 
 router.post("/", uploadCloud.single("image"), (req,res) => {
     console.log({ file: req.file});
-    const meetInputInfo = req.body;
-    meetInputInfo.image = req.file.url;
-    Meet.create(meetInputInfo)
-    .then((newlyCreatedMeet) => {
-        res.json({newlyCreatedMeet});
+    const meetInfo = req.body;
+    meetInfo.image = req.file.url;
+    Meet.create(meetInfo)
+    .then((newMeet) => {
+        res.json({newMeet});
     })
     .catch((err) => {
         res.json({success: false, error: err})
