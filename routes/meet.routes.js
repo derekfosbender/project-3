@@ -4,7 +4,7 @@ const router = express.Router();
 const Meet = require("../models/Meet.model");
 
 
-router.post("/", uploadImage.array("meet",2),(req,res) => {
+router.post("/", uploadImage.array("photo",2),(req,res) => {
     console.log({ file: req.file, path: req.path, body: req.body});
     const {description,location,time,} = req.body;
     const photo = req.files.map(file => file.path);
@@ -23,7 +23,7 @@ router.post("/", uploadImage.array("meet",2),(req,res) => {
 });
 
 router.get("/", (req,res) => {
-    Meet.find([{}],"meet")
+    Meet.find({},"meet")
     .then((meets) => {
         res.json({success: true, meets});
     })

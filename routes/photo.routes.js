@@ -23,7 +23,7 @@ router.post("/", uploadImage.array("photo",2),(req,res) => {
 
 
 router.get("/", (req,res) => {
-    Photo.find([{}],"photo")
+    Photo.find({}, "photo")
     .then((photos) => {
         res.json({success: true, photos});
     })
