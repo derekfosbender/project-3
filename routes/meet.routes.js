@@ -3,7 +3,7 @@ const router = express.Router();
 const Meet = require("../models/Meet.model");
 const uploadCloud = require("../config/cloudinary-setup");
 
-router.post("/", uploadCloud.single("image"), (req,res) => {
+router.post("/", uploadCloud.single("meet"), (req,res) => {
     console.log({ file: req.file});
     const meetInfo = req.body;
     meetInfo.image = req.file.url;

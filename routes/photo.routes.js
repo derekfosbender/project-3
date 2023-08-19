@@ -1,24 +1,29 @@
-const uploadCloud = require("../config/cloudinary-setup");
+const uploadImage = require('../config/cloudinary-setup')
 const express = require("express");
 const router = express.Router();
 const Photo = require("../models/Photo.model");
 
 
-router.post("/", uploadCloud.single("photo"),(req,res) => {
+router.post("/", uploadImage.array("photo",2),(req,res) => {
     console.log({ file: req.file, path: req.path, body: req.body});
-    const photoInfo = {...req.body};
-    photoInfo.photo = req.file.url;
-    Photo.create(photoInfo)
-    .then((newPhoto) => {
-        res.json({success: true, photo: newPhoto});
+    const {location,time,} = req.body;
+    const photo = req.files.map(file => file.path);
+    Photo.create({
+        photo,
+        location,
+        time,
+    })
+    .then((success) => {
+        res.json({success: true, photo: success});
     })
     .catch((err) => {
         res.json({success: false, error: err})
     })
 });
 
+
 router.get("/", (req,res) => {
-    Photo.find()
+    Photo.find([{}],"photo")
     .then((photos) => {
         res.json({success: true, photos});
     })

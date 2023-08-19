@@ -2,8 +2,7 @@ const mongoose = require("mongoose");
 const {Schema, model} = require("mongoose");
 
 const photoSchema = new Schema ({
-      photo: {type: String},
-      photoArray: {type: [String]},
+      photo: [{type: String}],
       location: {type: String},
       time: {type: String},
   });
